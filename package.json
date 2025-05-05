@@ -1,0 +1,11 @@
+{
+  "name": "node-hello-world",
+  "version": "1.0.0",
+  "description": "Simple Node.js Hello World app for Jenkins CI/CD",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Your Name",
+  "license": "ISC"
+}
