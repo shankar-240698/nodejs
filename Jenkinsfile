@@ -1,35 +1,35 @@
 pipeline {
     agent any
 
-    environment {
-        NODEJS_HOME = tool name: 'NodeJS', type: 'NodeJSInstallation'
-        PATH = "${NODEJS_HOME}/bin:${env.PATH}"
-    }
-
     stages {
-        stage('Clone Repo') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/node-hello-world.git'
+                checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                script {
+                    // Run npm install or other Node.js-related tasks
+                    sh 'npm install'
+                }
             }
         }
 
-        stage('Run App') {
+        stage('Build') {
             steps {
-                sh 'node app.js & sleep 5'
-                sh 'curl http://localhost:3000'
+                script {
+                    // Run build tasks like `npm run build`
+                    sh 'npm run build'
+                }
             }
         }
     }
 
     post {
         always {
-            sh 'pkill node || true'
+            cleanWs()
         }
     }
 }
